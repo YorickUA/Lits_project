@@ -27,7 +27,7 @@ var config = {
       name: 'lits-project'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/lits-project-production'
+    db: process.env.MONGODB_URI
   }
 };
 
