@@ -3,22 +3,34 @@ var express = require('express'),
   mongoose = require('mongoose'),
   Admin = mongoose.model('admin');
 
+  console.log("Attaching home.js");
 
 module.exports = function (app) {
+  console.log("exporting home.js");
   app.use('/', router);
   app.use('/admin', router);
   app.use('/login', router);
 };
 
 router.get('/', function (req, res, next) {
+  if(req.session.user){
+    res.render('admin');
+  }else{
     res.render('index', {
       title: 'Generator-Express MVC',
     });
+  }
 
 });
 
 router.get('/admin', function(req, res,next){
-  res.send("I'm admin");
+  if(req.session.user){
+    res.render('admin');
+  }else{
+    res.render('index', {
+      title: 'Generator-Express MVC',
+    });
+  }
 })
 
 router.post('/login', function(req, res){
@@ -27,6 +39,7 @@ router.post('/login', function(req, res){
     if (err) {
         res.redirect("/");
       }
+      req.session.user = user._id;
       res.redirect("/admin");
   });
 })
