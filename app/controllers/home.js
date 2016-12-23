@@ -1,18 +1,32 @@
 var express = require('express'),
   router = express.Router(),
   mongoose = require('mongoose'),
-  Article = mongoose.model('Article');
+  Admin = mongoose.model('admin');
+
 
 module.exports = function (app) {
   app.use('/', router);
+  app.use('/admin', router);
+  app.use('/login', router);
 };
 
 router.get('/', function (req, res, next) {
-  Article.find(function (err, articles) {
-    if (err) return next(err);
     res.render('index', {
       title: 'Generator-Express MVC',
-      articles: articles
     });
-  });
+
 });
+
+router.get('/admin', function(req, res,next){
+  res.send("I'm admin");
+})
+
+router.post('/login', function(req, res){
+  var password = req.body.password;
+  Admin.authorize(password, function(err, user) {
+    if (err) {
+        res.redirect("/");
+      }
+      res.redirect("/admin");
+  });
+})
