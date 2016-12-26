@@ -2,5 +2,8 @@ extends layout
 
 block content
   div I'm admin
+  form(method="POST" action="/upload"  enctype='multipart/form-data')
+    input(type="file" name="image" placeholder="choose image")
+    button(type="submit") upload
   form(method="POST" action="/logout")
     button(type="submit") Logout

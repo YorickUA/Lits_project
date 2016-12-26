@@ -8,17 +8,15 @@ var express = require('express'),
 module.exports = function (app) {
   console.log("exporting home.js");
   app.use('/', router);
-  app.use('/admin', router);
-  app.use('/login', router);
+  //app.use('/admin', router);
+  //app.use('/login', router);
 };
 
 router.get('/', function (req, res, next) {
   if(req.session.user){
     res.render('admin');
   }else{
-    res.render('index', {
-      title: 'Generator-Express MVC',
-    });
+    res.render('index');
   }
 
 });
@@ -27,9 +25,7 @@ router.get('/admin', function(req, res,next){
   if(req.session.user){
     res.render('admin');
   }else{
-    res.render('index', {
-      title: 'Generator-Express MVC',
-    });
+    res.render('index');
   }
 })
 
