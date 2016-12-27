@@ -1,6 +1,10 @@
 extends layout
 
-block content
-  form(id="input_form" method="POST" action="/login")
-    input(type="password" name="password" placeholder="enter as admin")
-    button(type="submit") submit
+block header
+  div(style="flex-basis: 400px; display: flex; justify-content: center;")
+   form(id="input_form" method="POST" action="/")
+      div(class="ui input")
+        input(type="hidden" name="action" value="login")
+        input(type="password" name="password" placeholder="Enter as admin")
+      button(class="ui button primary" type="submit") submit
+      span(class="message")= message

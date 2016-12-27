@@ -6,3 +6,27 @@ body {
 a {
   color: #00B7FF;
 }
+
+input[type="file"] {
+    display: none;
+}
+
+.header{
+  padding: 8px 10px 0px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-image: -webkit-linear-gradient(top, hsl(144, 59%, 75%), hsl(100, 49%, 75%));
+  flex-basis: 400px;
+}
+.header form{
+  display:inline;
+}
+.Title{
+  font-family: 'Amaranth', sans-serif;
+  font-size: 32pt;
+}
+.Title_text{
+  font-size: 0.8em;
+  line-height: 32px
+}

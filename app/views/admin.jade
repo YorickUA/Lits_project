@@ -1,9 +1,6 @@
 extends layout
 
-block content
-  div I'm admin
-  form(method="POST" action="/upload"  enctype='multipart/form-data')
-    input(type="file" name="image" placeholder="choose image")
-    button(type="submit") upload
-  form(method="POST" action="/logout")
-    button(type="submit") Logout
+block header
+  div(style="flex-basis: 400px; display: flex; justify-content: center;")
+    form(method="POST" action="/logout")
+      button(class="ui button red" type="submit") Logout

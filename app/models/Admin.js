@@ -51,7 +51,9 @@ adminSchema.virtual('password')
         function(admin, callback) {
           if (admin.checkPassword(password)) {
               callback(null, admin);
-            } else {}
+            } else {
+              callback("error");
+            }
           }
       ], callback);
     };

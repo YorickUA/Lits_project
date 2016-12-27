@@ -1,0 +1,5 @@
+form(method="POST" action="/upload"  enctype='multipart/form-data')
+  label
+   input(type="file" name="image")
+   span(class="ui button" id="fileName" style="margin-right:5px") Choose file
+  button(class="ui button primary" type="submit") Upload
