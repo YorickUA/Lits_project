@@ -4,10 +4,12 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var PlayerSchema = new Schema({
-  name: { type:String,
+  name: {
+      type:String,
       required: true
   },
-  surname:{ type:String,
+  surname:{
+      type:String,
       required: true
   },
   date_of_birth:{
@@ -36,7 +38,13 @@ var PlayerSchema = new Schema({
   country:{
     type:String,
     required: true
+  },
+  bio:{
+    type:String
   }
+},{
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true}
 });
 
 PlayerSchema.virtual('fullName').get(function () {

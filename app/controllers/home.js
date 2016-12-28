@@ -12,6 +12,7 @@ module.exports = function (app) {
 };
 
 router.get('/', function (req, res, next) {
+  console.log("//");
   if(req.session.user){
     res.redirect('/admin');
   }else{
@@ -21,6 +22,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/admin', function(req, res,next){
+  console.log("/admin");
   if(req.session.user){
     res.render('admin');
   }else{
@@ -45,7 +47,5 @@ router.post('/', function(req, res) {
           res.redirect("/admin");
         }
       });
-    default:
-      return;
   }
 })

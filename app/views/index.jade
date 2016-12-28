@@ -3,8 +3,31 @@ extends layout
 block header
   div(style="flex-basis: 400px; display: flex; justify-content: center;")
    form(id="input_form" method="POST" action="/")
-      div(class="ui input")
+      div(class="ui input" style="margin-right:3px")
         input(type="hidden" name="action" value="login")
         input(type="password" name="password" placeholder="Enter as admin")
       button(class="ui button primary" type="submit") submit
       span(class="message")= message
+
+
+block toolbar
+ div(id="toolbar" class="ui top menu" style="align-items:baseline; padding:0px 2px 0px 10px") Sort by &nbsp
+   select(id="card_sort" class="ui dropdown")
+     option(value="0") Career century breaks
+     option(value="1") Ranking titles
+     option(value="2") Years pro
+     option(value="3") World championship titles
+     option(value="4") Country
+   |&nbsp; Choose country &nbsp;
+   select( id="country_filter" class="ui dropdown")
+   div(class="ui icon input" style="margin:5px")
+    input(id="search" type=text placeholder="search" style="border-radius: 0px; height: 100%;")
+    i(class="search icon")
+
+
+ block content
+ div(id="content_container" class="ui container fluid")
+   div(class="ui cards")
+
+ block js
+  script(src='/js/main.js')

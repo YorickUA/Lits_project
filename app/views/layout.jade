@@ -6,21 +6,21 @@ html(lang='en')
     title Snooker_DB
     block css
       link(rel='stylesheet', href='/css/style.css')
-      link(rel='stylesheet', href='components/semantic/dist/semantic.min.css')
+      link(rel='stylesheet', href='/components/semantic/dist/semantic.min.css')
       link(href="https://fonts.googleapis.com/css?family=Amaranth" rel="stylesheet")
-      link(rel='icon', href='favicon.png' type='image/png')
-    block js
+      link(rel='icon', href='/favicon.png' type='image/png')
       if ENV_DEVELOPMENT
         script(src='http://localhost:35729/livereload.js')
-      script(src='components/jquery/dist/jquery.min.js')
-      script(src='js/main.js')
-      script(src='components/semantic/dist/semantic.min.js')
+      script(src='/components/jquery/dist/jquery.min.js')
+      script(src='/components/semantic/dist/semantic.min.js')
+      block js
   body
-    div(class="main_container")
-      div(class="header")
-        img(src="favicon.png" height="100" width="100")
-        span(class="Title") Snooker_DB
+    div(class="main_container ui container fluid" style="height: 100%;")
+      div(id="header" class="ui top menu")
+        img(src="/favicon.png" height="100" width="100")
+        a(href="/" class="Title") Snooker_DB
           span(class="Title_text")  &mdash; fancy snooker players database
           i(class="smile icon" style="padding-top:12px")
         block header
+      block toolbar
       block content

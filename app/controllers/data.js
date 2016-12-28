@@ -14,13 +14,17 @@ module.exports = function(app) {
 
 router.get('/data', function(req, res, next) {
 
-  //  var filter_data = req.body.filter;
-  Player.find({
-    country: 'China'
-  }, function(err, players) {
-    players.forEach(function(player) {
-      console.log(player.fullName)
-    });
+  Player.find({}, function(err, players) {
+
+    res.send(players);
+  });
+});
+
+router.get('/data/:filter', function(req, res, next) {
+
+  var filter_data = JSON.parse(req.params.filter);
+  console.log(filter_data);
+  Player.find(filter_data, function(err, players) {
     res.send(players);
   });
 });
