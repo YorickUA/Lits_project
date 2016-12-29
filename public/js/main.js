@@ -1,10 +1,7 @@
 $(document).ready(function() {
   var players, active_set;
 
-  $('input[name="image"]').on("change", function() {
-    var path = $(this).val().split("\\");
-    $('#fileName').html(path[path.length - 1]);
-  })
+
 
   $.get(document.URL.substring(0, document.URL.lastIndexOf('/')) + "/data", function(response) {
     players = response;

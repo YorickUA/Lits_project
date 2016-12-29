@@ -2,12 +2,16 @@ extends layout
 
 block header
   div(style="flex-basis: 400px; display: flex; justify-content: center;")
-   form(id="input_form" method="POST" action="/")
-      div(class="ui input" style="margin-right:3px")
-        input(type="hidden" name="action" value="login")
-        input(type="password" name="password" placeholder="Enter as admin")
-      button(class="ui button primary" type="submit") submit
-      span(class="message")= message
+    if user
+      form(method="POST" action="/logout")
+        button(class="ui button red" type="submit") Logout
+    else
+      form(id="input_form" method="POST" action="/")
+        div(class="ui input" style="margin-right:3px")
+          input(type="hidden" name="action" value="login")
+          input(type="password" name="password" placeholder="Enter as admin")
+        button(class="ui button primary" type="submit") submit
+        span(class="message")= message
 
 
 block toolbar

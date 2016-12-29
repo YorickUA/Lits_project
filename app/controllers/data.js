@@ -20,11 +20,10 @@ router.get('/data', function(req, res, next) {
   });
 });
 
-router.get('/data/:filter', function(req, res, next) {
-
-  var filter_data = JSON.parse(req.params.filter);
+router.get('/data/:id', function(req, res, next) {
+  var id = JSON.parse(req.params.id);
   console.log(filter_data);
-  Player.find(filter_data, function(err, players) {
+  Player.find({_id:id}, function(err, players) {
     res.send(players);
   });
 });
@@ -32,7 +31,8 @@ router.get('/data/:filter', function(req, res, next) {
 router.post('/upload', multipartMiddleware ,function(req, res, next) {
   fs.readFile(req.files.image.path, function(err, data) {
     var imageName = req.files.image.name.split(".");
-    if (!imageName) {
+    console.log(imageName);
+    if (!imageName[0]) {
       console.log("There was an error")
       res.redirect("/");
       res.end();

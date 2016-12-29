@@ -2,9 +2,9 @@ extends layout
 
 block header
   div(style="flex-basis: 400px; display: flex; justify-content: center;")
-   form(id="input_form" method="POST" action="/")
+   form(id="input_form" method="POST" action="login")
       div(class="ui input" style="margin-right:3px")
-        input(type="hidden" name="action" value="login")
+        input(type="hidden" name="id" value="#{id}")
         input(type="password" name="password" placeholder="Enter as admin")
       button(class="ui button primary" type="submit") submit
       span(class="message")= message
@@ -13,36 +13,40 @@ block js
  script(src='/js/card_view.js')
 
 block content
- div(class="ui container fluid" style="width:80%; padding: 10px; box-shadow:0 0 10px rgba(0,0,0,0.5);")
-   div(id="card_container")
-    img(class="card_image" style="margin-right:10px" src="/images/#{avatar_picture}")
-    div(style="font-size:13pt; display: inline; min-width: 300px; line-height: 38px;")
-      div
-        span(style="font-weight:bold") &nbsp;&nbsp; Name:&nbsp;
-        span #{name}
-      div
-        span(style="font-weight:bold") &nbsp;&nbsp; Surname:&nbsp;
-        span #{surname}
-      div
-        span(style="font-weight:bold") &nbsp;&nbsp; Date of birth:&nbsp;
-        span #{date_of_birth.toISOString().substring(0, date_of_birth.toISOString().indexOf("T") )}
-      div
-        span(style="font-weight:bold") &nbsp;&nbsp; Country:&nbsp;
-        span #{country}
-      div
-        span(style="font-weight:bold") &nbsp; Career achievements:&nbsp;
-      div
-        span(style="font-weight:bold") &nbsp;&nbsp;  Years in game:&nbsp;
-        span #{Years_pro}
-      div
-        span(style="font-weight:bold") &nbsp;&nbsp; Century breaks:&nbsp;
-        span #{century_breaks}
-      div
-        span(style="font-weight:bold") &nbsp;&nbsp; Ranking event titles:&nbsp;
-        span #{ranking_titles}
-      div
-        span(style="font-weight:bold")&nbsp;&nbsp;  World championship titles:&nbsp;
-        span #{world_champs}
-   div
-      span(style="font-weight:bold; font-size:13pt") &nbsp;&nbsp; Biography:&nbsp;
+ div(class="ui container fluid" style="width:80%;background-color:white; position:relative; padding: 10px; box-shadow:0 0 10px rgba(0,0,0,0.5);")
+   div(class="ui two column doubling stackable grid container")
+    div(class="six wide column")
+      div(class="ui")
+       img(class="ui fluid image " style="margin-right:10px" src="/images/#{avatar_picture}")
+      div(style="font-size:13pt; display: inline; min-width: 300px; line-height: 38px;")
+        div
+          span(style="font-weight:bold") Personal info:
+        div
+          span(style="font-weight:bold") &emsp;Name:&nbsp;
+          span #{name}
+        div
+          span(style="font-weight:bold") &emsp;Surname:&nbsp;
+          span #{surname}
+        div
+          span(style="font-weight:bold") &emsp;Date of birth:&nbsp;
+          span #{date_of_birth.toISOString().substring(0, date_of_birth.toISOString().indexOf("T") )}
+        div
+          span(style="font-weight:bold") &emsp; Country:&nbsp;
+          span #{country}
+        div
+          span(style="font-weight:bold") Career achievements:&nbsp;
+        div
+          span(style="font-weight:bold") &emsp; Years in game:&nbsp;
+          span #{Years_pro}
+        div
+          span(style="font-weight:bold") &emsp;Century breaks:&nbsp;
+          span #{century_breaks}
+        div
+          span(style="font-weight:bold") &emsp;Ranking event titles:&nbsp;
+          span #{ranking_titles}
+        div
+          span(style="font-weight:bold") &emsp;World championship titles:&nbsp;
+          span #{world_champs}
+    div(class="ten wide column")
+      span(style="font-weight:bold; font-size:13pt") &emsp;Biography:&nbsp;
       span(style=" font-size:13pt")  #{bio}

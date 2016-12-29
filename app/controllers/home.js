@@ -12,11 +12,10 @@ module.exports = function (app) {
 };
 
 router.get('/', function (req, res, next) {
-  console.log("//");
   if(req.session.user){
-    res.redirect('/admin');
+    res.render('index', {user:true});
   }else{
-    res.render('index');
+    res.render('index', {user:false});
   }
 
 });
@@ -41,11 +40,19 @@ router.post('/', function(req, res) {
       console.log(password);
       Admin.authorize(password, function(err, user) {
         if (err) {
-          res.render('index', {message:"Wrong password"});
+          res.render('index', {user:false, message:"Wrong password"});
           }else{
           req.session.user = user._id;
-          res.redirect("/admin");
+          res.redirect("/");
         }
       });
   }
 })
+
+router.post('/logout', function(req, res){
+  var sid = req.session.id;
+  req.session.destroy(function(err) {
+      if (err) return next(err);
+        res.redirect("/");
+  })
+});
