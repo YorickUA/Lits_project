@@ -40,10 +40,12 @@ router.post('/', function(req, res) {
       console.log(password);
       Admin.authorize(password, function(err, user) {
         if (err) {
-          res.render('index', {user:false, message:"Wrong password"});
+        //  res.render('index', {user:false, message:"Wrong password"});
+          res.send( false)
           }else{
           req.session.user = user._id;
-          res.redirect("/");
+        // res.render('index',{user:true});
+         res.send( true)
         }
       });
   }
@@ -53,6 +55,6 @@ router.post('/logout', function(req, res){
   var sid = req.session.id;
   req.session.destroy(function(err) {
       if (err) return next(err);
-        res.redirect("/");
+        res.redirect('/');
   })
 });

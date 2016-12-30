@@ -47,7 +47,6 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/login', function(req, res) {
       var password = req.body.password;
-      console.log(password);
       var id=req.body.id;
       Admin.authorize(password, function(err, user) {
         if (err) {

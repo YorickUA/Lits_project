@@ -18,13 +18,14 @@ module.exports = function(app, config) {
 
   app.use(favicon(config.root + '/public/favicon.png'));
   app.use(logger('dev'));
+  app.use(express.static(config.root + '/public'));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({
     extended: true
   }));
   app.use(cookieParser());
   app.use(compress());
-  app.use(express.static(config.root + '/public'));
+
   app.use(methodOverride());
 
 var sessionStore = require('./sessionStore');

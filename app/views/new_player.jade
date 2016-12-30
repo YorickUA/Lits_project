@@ -2,27 +2,18 @@ extends layout
 
 block header
   div(style="flex-basis: 400px; display: flex; justify-content: center;")
-   form(method="POST" action="logout")
-     input(type="hidden" name="id" value="#{id}")
-     a(class="ui button green" href="/new") New player
-     button(class="ui button red" type="submit") Logout
+   form(id="input_form" method="POST" action="logout")
+    button(class="ui button red" id="logout") Logout
 
 block js
- script(src='/js/edit_view.js')
+ script(src='/js/new_player.js')
  script(src='/components/jquery-ui/ui/widgets/datepicker.js')
 
 block content
  div(class="ui container fluid" style="width:80%; background-color:white; padding: 10px; box-shadow:0 0 10px rgba(0,0,0,0.5);")
-   div(id="card_container")
-    div(style="display:inline-block")
-     img(class="card_image" style="margin-right:10px; display:block" src="/images/#{avatar_picture}")
-     form(method="POST" style="margin-top: 5px;" action="/upload"  enctype='multipart/form-data')
-       label
-        input(type="file" name="image")
-        span(class="ui button" id="fileName" style="margin-right:5px") Choose file
-       button(class="ui button primary" type="submit") Upload
-    form(method="POST" class="ui form" action="edit")
-      div(style="font-size:13pt; vertical-align: top;; display: inline-block; min-width: 300px; line-height: 38px;")
+   div(id="card_container" style="justify-content:center")
+    form(method="POST" class="ui form" action="new")
+      div(style="font-size:13pt; vertical-align: top; display: inline-block; min-width: 300px; line-height: 38px;")
         div(class="three fields")
           div(class="field")
             span(style="font-weight:bold") &nbsp;&nbsp; Name:&nbsp;

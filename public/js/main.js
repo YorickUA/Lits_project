@@ -1,6 +1,42 @@
 $(document).ready(function() {
   var players, active_set;
 
+  $('#submit_pass').on('click', login_handler )
+  $('#logout').on('click', logout_handler )
+
+  function login_handler(){
+      $.post(document.URL.substring(0, document.URL.lastIndexOf('/')),
+      {
+        action:"login",
+        password:$('input[type="password"]').val()
+      },
+      function(res){
+        if(!res){
+          $('.message').html("Wrong password")
+        }else{
+          $('#password_area').html("<a href=\"new\" class=\"ui button green\">New player</a> <button id=\"logout\" class=\"ui button red\">Logout</button> ")
+          $('#logout').on('click', logout_handler)
+        }
+      })
+    }
+
+
+  function logout_handler(){
+    console.log(document.URL.substring(0, document.URL.lastIndexOf('/'))+"/logout")
+    $.post(document.URL.substring(0, document.URL.lastIndexOf('/'))+"/logout",{},
+
+    function(){
+      var content=""
+      content+="<div style=\"margin-right:3px\" class=\"ui input\">"
+      content+="<input type=\"password\" placeholder=\"Enter as admin\"></div>"
+      content+="<button id=\"submit_pass\" class=\"ui button primary\">submit</button>"
+      content+="<span class=\"message\"></span>"
+      $('#password_area').html(content);
+      $('#submit_pass').on('click', login_handler )
+
+    })
+
+  }
 
 
   $.get(document.URL.substring(0, document.URL.lastIndexOf('/')) + "/data", function(response) {
