@@ -1,0 +1,9 @@
+extends layout
+
+block header
+  div
+    .header_block
+      label!="Enter admin password &nbsp;"
+      form.password_input(method="POST", action="#")
+        input(type="password", placeholder="Admin password")
+        button(type="submit") #{Some_text}

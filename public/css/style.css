@@ -1,8 +1,30 @@
 body {
-  padding: 50px;
+  /*padding: 50px;*/
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.header_block {
+  color: white;
+  background-color: #8e44ad;
+  text-align: right;
+  display: inline-flex;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 20px;
+}
+header label {
+  margin-right: 3px;
+}
+
+.password_input{
+  /*display: inline;
+  color:white;
+  background-color: #8e44ad;*/
+  color:black;
 }
