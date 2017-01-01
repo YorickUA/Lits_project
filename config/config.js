@@ -9,7 +9,16 @@ var config = {
       name: 'lits-project'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/lits-project-development'
+    db: 'mongodb://localhost/lits-project-development',
+    session: {
+      "secret": "KillerIsJim",
+      "key": "sid",
+      "cookie": {
+        "path": "/",
+        "httpOnly": true,
+        "maxAge": null
+      }
+    }
   },
 
   test: {
@@ -18,7 +27,16 @@ var config = {
       name: 'lits-project'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/lits-project-test'
+    db: process.env.MONGODB_URI,
+    session: {
+      "secret": "KillerIsJim",
+      "key": "sid",
+      "cookie": {
+        "path": "/",
+        "httpOnly": true,
+        "maxAge": null
+      }
+    }
   },
 
   production: {
@@ -27,7 +45,16 @@ var config = {
       name: 'lits-project'
     },
     port: process.env.PORT || 3000,
-    db: process.env.MONGODB_URI
+    db: process.env.MONGODB_URI,
+    session: {
+      "secret": "KillerIsJim",
+      "key": "sid",
+      "cookie": {
+        "path": "/",
+        "httpOnly": true,
+        "maxAge": null
+      }
+    }
   }
 };
 

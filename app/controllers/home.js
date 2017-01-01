@@ -1,25 +1,60 @@
 var express = require('express'),
   router = express.Router(),
   mongoose = require('mongoose'),
-  Article = mongoose.model('Article');
+  Admin = mongoose.model('admin');
+  console.log("Attaching home.js");
 
 module.exports = function (app) {
+  console.log("exporting home.js");
   app.use('/', router);
+  //app.use('/admin', router);
+  //app.use('/login', router);
 };
 
 router.get('/', function (req, res, next) {
-  Article.find(function (err, articles) {
-    if (err) return next(err);
-    res.render('index', {
-      title: 'Generator-Express MVC',
-      articles: articles,
-      Some_text: 'aaalal'
-    });
+  if(req.session.user){
+    res.render('index', {user:true});
+  }else{
+    res.render('index', {user:false});
+  }
 
-    // res.render('header'/*, {
-    //   title: 'Generator-Express MVC',
-    //   articles: articles
-    // }*/);
+});
 
-  });
+router.get('/admin', function(req, res,next){
+  console.log("/admin");
+  if(req.session.user){
+    res.render('admin');
+  }else{
+    res.redirect('/');
+  }
+})
+// router.get('/login', function(req, res){
+//   res.render('login');
+// })
+
+
+router.post('/', function(req, res) {
+  switch (req.body.action) {
+    case 'login':
+      var password = req.body.password;
+      console.log(password);
+      Admin.authorize(password, function(err, user) {
+        if (err) {
+        //  res.render('index', {user:false, message:"Wrong password"});
+          res.send( false)
+          }else{
+          req.session.user = user._id;
+        // res.render('index',{user:true});
+         res.send( true)
+        }
+      });
+  }
+})
+
+router.post('/logout', function(req, res){
+  var sid = req.session.id;
+  req.session.destroy(function(err) {
+      if (err) return next(err);
+        res.redirect('/');
+  })
 });

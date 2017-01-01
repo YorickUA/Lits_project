@@ -3,15 +3,26 @@ html(lang='en')
   head
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width')
-    title= title
+    title Snooker_DB
     block css
+      link(rel='stylesheet', href='/components/jquery-ui/themes/base/jquery-ui.css')
       link(rel='stylesheet', href='/css/style.css')
       link(rel='stylesheet', href='/components/semantic/dist/semantic.min.css')
-    block js
+      link(href="https://fonts.googleapis.com/css?family=Amaranth" rel="stylesheet")
+      link(rel='icon', href='/favicon.png' type='image/png')
+
       if ENV_DEVELOPMENT
         script(src='http://localhost:35729/livereload.js')
       script(src='/components/jquery/dist/jquery.min.js')
       script(src='/components/semantic/dist/semantic.min.js')
+      block js
   body
-    block header
-    block content
+    div(class="main_container ui container fluid" style="height: 100%;")
+      div(id="header" class="ui top menu")
+        img(src="/favicon.png" height="100" width="100")
+        a(href="/" class="Title") Snooker_DB
+          span(class="Title_text")  &mdash; fancy snooker players database
+          i(class="smile icon" style="padding-top:12px")
+        block header
+      block toolbar
+      block content
