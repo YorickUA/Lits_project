@@ -4,6 +4,7 @@ var express = require('express'),
   Player = mongoose.model('Player');
   Admin=mongoose.model('admin');
 var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
 var fs = require('fs');
 var config = require('../../config/config')
 
@@ -42,9 +43,6 @@ router.get('/:id', function(req, res, next) {
 })
 
 
-
-
-
 router.post('/login', function(req, res) {
       var password = req.body.password;
       var id=req.body.id;
@@ -56,4 +54,55 @@ router.post('/login', function(req, res) {
           res.redirect(id);
         }
       });
+
+router.post('/:id', multipartMiddleware ,function(req, res, next) {
+
+  Player.find({_id:req.params.id},function(err, result){
+
+      var name=(result[0].name+"_"+result[0].surname).toLowerCase();
+      var current_image=result[0].avatar_picture;
+      //console.log(name);
+      fs.readFile(req.files.image.path, function(err, data) {
+        var imageName=name;
+        if (!req.files.image.name) {
+            console.log("There was an error")
+            res.redirect("/");
+            res.end();
+          } else {
+            if(current_image=="default.jpg"){
+              var i=0;
+              var suffics="";
+              while(exists(config.root + "\\public\\images\\" + imageName+suffics+".jpg")){
+                i++;
+                suffics=i;
+              }
+              var newPath = config.root + "\\public\\images\\" + imageName+suffics+".jpg";
+              var new_name=imageName+suffics+".jpg";
+            }else{
+              var newPath = config.root + "\\public\\images\\" + current_image;
+              var new_name=current_image
+            }
+
+          fs.writeFile(newPath, data, function(err) {
+               Player.update({_id:req.params.id},{avatar_picture:new_name}, function(){
+                 res.redirect("/card/"+req.params.id);
+               })
+      })
+     }
+    })
+  })
+
+
+})
+
+function exists(route){
+try{
+   fs.statSync(route);
+ }catch(err){
+   if(err.code == 'ENOENT') return false;
+ }
+ return true;
+}
+
+
 })

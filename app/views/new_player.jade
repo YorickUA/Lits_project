@@ -10,38 +10,42 @@ block js
  script(src='/components/jquery-ui/ui/widgets/datepicker.js')
 
 block content
- div(class="ui container fluid" style="width:80%; background-color:white; padding: 10px; box-shadow:0 0 10px rgba(0,0,0,0.5);")
+ div(class="ui container fluid" style="width:90%; background-color:white; padding: 10px; box-shadow:0 0 10px rgba(0,0,0,0.5);")
    div(id="card_container" style="justify-content:center")
-    form(method="POST" class="ui form" action="new")
-      div(style="font-size:13pt; vertical-align: top; display: inline-block; min-width: 300px; line-height: 38px;")
-        div(class="three fields")
-          div(class="field")
-            span(style="font-weight:bold") &nbsp;&nbsp; Name:&nbsp;
-            input(type="text" name="name")
-          div(class="field")
-            span(style="font-weight:bold") &nbsp;&nbsp; Surname:&nbsp;
-            input(type="text" name="surname")
-          div(class="field")
-            span(style="font-weight:bold") &nbsp;&nbsp; Date of birth:&nbsp;
-            input(type="text" name="date_of_birth")
-        div
-          span(style="font-weight:bold") &nbsp;&nbsp; Country:&nbsp;
-          input(type="text" name="country")
-        div(class="two fields")
-          div(class="field")
-            span(style="font-weight:bold") &nbsp;&nbsp;  Years in game:&nbsp;
-            input(type="number" name="years_pro" min="0")
-          div(class="field")
-            span(style="font-weight:bold") &nbsp;&nbsp; Century breaks:&nbsp;
-            input(type="number" name="century_breaks" min="0")
-        div(class="two fields")
-          div(class="field")
-            span(style="font-weight:bold") &nbsp;&nbsp; Ranking event titles:&nbsp;
-            input(type="number" name="ranking_titles" min="0")
-          div(class="field")
-            span(style="font-weight:bold")&nbsp;&nbsp;World championship titles:&nbsp;
-            input(type="number" name="world_champs" min="0")
-      div
-        span(style="font-weight:bold; font-size:13pt") &nbsp;&nbsp; Biography:&nbsp;
-        textarea(rows="50" name="bio")
-      button(type="submit" style="margin-top:5px; margin-left:10px; " class="ui button primary") Save
+    form(method="POST" id="new_player" class="ui form" action="new")
+      div(class="ui two column doubling stackable grid")
+        div(class="ui eight wide column" style="font-size:13pt; vertical-align: top; display: inline-block; min-width: 300px; line-height: 38px;")
+          div(class="ui three column stackable grid")
+            div(class="ui column")
+              span(style="font-weight:bold; white-space:nowrap") &nbsp;&nbsp; Name*:&nbsp;
+              input(type="text" autocomplete="off" name="name")
+            div(class="ui column")
+              span(style="font-weight:bold; white-space:nowrap") &nbsp;&nbsp; Surname*:&nbsp;
+              input(type="text" autocomplete="off" name="surname")
+            div(class="ui column")
+              span(style="font-weight:bold; white-space:nowrap") &nbsp;&nbsp; Date of birth*:&nbsp;
+              input(type="text" autocomplete="off" name="date_of_birth")
+          div
+            span(style="font-weight:bold; white-space:nowrap") &nbsp;&nbsp; Country*:&nbsp;
+            input(type="text" autocomplete="off" name="country")
+          div(class="ui two column grid")
+            div(class="ui column")
+              span(style="font-weight:bold; white-space:nowrap") &nbsp;&nbsp;  Years in game*:&nbsp;
+              input(type="number" autocomplete="off" name="years_pro" min="0")
+            div(class="ui column")
+              span(style="font-weight:bold; white-space:nowrap") &nbsp;&nbsp; Century breaks*:&nbsp;
+              input(type="number" autocomplete="off" name="century_breaks" min="0")
+          div(class="ui two column grid")
+            div(class="ui column")
+              span(style="font-weight:bold; white-space:nowrap") &nbsp;&nbsp; Ranking event titles*:&nbsp;
+              input(type="number" autocomplete="off" name="ranking_titles" min="0")
+            div(class="ui column")
+              span(style="font-weight:bold; white-space:nowrap")&nbsp;&nbsp;World championship titles*:&nbsp;
+              input(type="number" autocomplete="off" name="world_champs" min="0")
+        div(class="ui eight wide column")
+          span(style="font-weight:bold; font-size:13pt; line-height: 38px;") &nbsp;&nbsp; Biography:&nbsp;
+          textarea(rows="18" name="bio")
+          div(style="float:right; position:relative")
+            div(id="save_message" style="display:none; background-color:#e74c3c" class="ui message")
+              div(class="header" ) Fill all reqiured fields
+            button(type="submit" id="add_new" style="margin-top:5px" class="ui button primary") Save
