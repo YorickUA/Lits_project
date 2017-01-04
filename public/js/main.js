@@ -41,7 +41,6 @@ $(document).ready(function() {
 
   $.get(document.URL.substring(0, document.URL.lastIndexOf('/')) + "/data", function(response) {
     players = response;
-    console.log(players);
     active_set=players
     setup_filter();
     apply_sort();
@@ -139,7 +138,7 @@ $(document).ready(function() {
 
   }
 
-  $('#search').on('change', function(){
+  $('#search').on('keyup', function(){
     active_set=[];
     if($(this).val()==""){
       active_set=players;

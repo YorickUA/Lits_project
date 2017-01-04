@@ -19,6 +19,9 @@ router.get('/', function (req, res, next) {
   }
 
 });
+router.get('/card',function(req,res,next){
+  res.redirect('/');
+})
 
 router.get('/admin', function(req, res,next){
   console.log("/admin");
@@ -28,10 +31,6 @@ router.get('/admin', function(req, res,next){
     res.redirect('/');
   }
 })
-// router.get('/login', function(req, res){
-//   res.render('login');
-// })
-
 
 router.post('/', function(req, res) {
   switch (req.body.action) {

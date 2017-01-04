@@ -6,14 +6,17 @@ block header
       div(class="ui input" style="margin-right:3px")
         input(type="hidden" name="id" value="#{id}")
         input(type="password" name="password" placeholder="Enter as admin")
-      button(class="ui button primary" type="submit") submit
+      button(class="ui button primary" type="submit") Submit
       span(class="message")= message
 
 block js
  script(src='/js/card_view.js')
 
 block content
+
  div(class="ui container fluid" style="width:80%;background-color:white; position:relative; padding: 10px; box-shadow:0 0 10px rgba(0,0,0,0.5);")
+   h1(style="font-family: sans-serif;") &emsp; Player profile
+   hr
    div(class="ui two column doubling stackable grid container")
     div(class="six wide column")
       div(class="ui")

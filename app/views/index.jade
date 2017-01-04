@@ -11,7 +11,7 @@ block header
       div(class="ui input" style="margin-right:3px")
         //input(type="hidden" name="action" value="login")
         input(type="password" placeholder="Enter as admin")
-      button(class="ui button primary" id="submit_pass") submit
+      button(class="ui button primary" id="submit_pass") Submit
       span(class="message")= message
 
 
@@ -27,7 +27,7 @@ block toolbar
   div(style="margin:5px") Choose country &nbsp;
    select( id="country_filter" class="ui dropdown")
   div(class="ui icon input" style="margin:5px")
-   input(id="search" type=text placeholder="Search" style="border-radius: 0px; height: 100%;")
+   input(id="search" type=text placeholder="Search" autocomplete="off" style="border-radius: 0px; height: 100%;")
    i(class="search icon")
 
 

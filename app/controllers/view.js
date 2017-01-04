@@ -12,6 +12,7 @@ module.exports = function(app) {
   app.use('/card', router);
 };
 
+
 router.post('/logout', function(req, res){
   var sid = req.session.id;
   var id=req.body.id;
@@ -21,7 +22,7 @@ router.post('/logout', function(req, res){
   })
 });
 
-router.get('/data/:id', function(req, res, next) {
+router.get('/data/:id', function(req, res) {
   var id = req.params.id;
   Player.find({_id:id}, function(err, players) {
     res.send(players);
@@ -31,19 +32,23 @@ router.get('/data/:id', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
   var id=req.params.id;
   Player.find({_id:id}, function(err, player) {
+  if (!player) {
+     res.redirect('/');
+     res.end();
+   }else{
     player=player[0];
-    console.log(player.date_of_birth.toISOString());
     if (req.session.user){
       res.render("edit_card", player);
     }
     else{
       res.render("view_card", player);
     }
+  }
   });
 })
 
 
-router.post('/login', function(req, res) {
+router.post('/login', function(req, res, next) {
       var password = req.body.password;
       var id=req.body.id;
       Admin.authorize(password, function(err, user) {
@@ -54,46 +59,70 @@ router.post('/login', function(req, res) {
           res.redirect(id);
         }
       });
-
-router.post('/:id', multipartMiddleware ,function(req, res, next) {
-
-  Player.find({_id:req.params.id},function(err, result){
-
-      var name=(result[0].name+"_"+result[0].surname).toLowerCase();
-      var current_image=result[0].avatar_picture;
-      //console.log(name);
-      fs.readFile(req.files.image.path, function(err, data) {
-        var imageName=name;
-        if (!req.files.image.name) {
-            console.log("There was an error")
-            res.redirect("/");
-            res.end();
-          } else {
-            if(current_image=="default.jpg"){
-              var i=0;
-              var suffics="";
-              while(exists(config.root + "\\public\\images\\" + imageName+suffics+".jpg")){
-                i++;
-                suffics=i;
-              }
-              var newPath = config.root + "\\public\\images\\" + imageName+suffics+".jpg";
-              var new_name=imageName+suffics+".jpg";
-            }else{
-              var newPath = config.root + "\\public\\images\\" + current_image;
-              var new_name=current_image
-            }
-
-          fs.writeFile(newPath, data, function(err) {
-               Player.update({_id:req.params.id},{avatar_picture:new_name}, function(){
-                 res.redirect("/card/"+req.params.id);
-               })
-      })
-     }
-    })
   })
 
+router.post('/:id', multipartMiddleware ,function(req, res, next) {
+  if(req.session.user){
+    Player.find({_id:req.params.id},function(err, result){
 
+        var name=(result[0].name+"_"+result[0].surname).toLowerCase();
+        var current_image=result[0].avatar_picture;
+        //console.log(name);
+        fs.readFile(req.files.image.path, function(err, data) {
+          var imageName=name;
+          if (!req.files.image.name) {
+              console.log("There was an error")
+              res.redirect("/");
+              res.end();
+            } else {
+              if(current_image=="default.jpg"){
+                var i=0;
+                var suffics="";
+                while(exists(config.root + "\\public\\images\\" + imageName+suffics+".jpg")){
+                  i++;
+                  suffics=i;
+                }
+                var newPath = config.root + "\\public\\images\\" + imageName+suffics+".jpg";
+                var new_name=imageName+suffics+".jpg";
+              }else{
+                var newPath = config.root + "\\public\\images\\" + current_image;
+                var new_name=current_image
+              }
+
+            fs.writeFile(newPath, data, function(err) {
+                 Player.update({_id:req.params.id},{avatar_picture:new_name}, function(){
+                   res.redirect("/card/"+req.params.id);
+                 })
+        })
+       }
+      })
+    })
+
+  }else{
+    res.status(403);
+    res.end();
+  }
 })
+
+router.delete('/:id',function(req, res){
+  if(req.session.user){
+    var id=req.params.id;
+    var player=Player.findOne({_id:id}, function(err, result){
+    console.log(result);
+
+    if(result.avatar_picture!="default.jpg"){
+      fs.unlink(config.root + "\\public\\images\\"+result.avatar_picture, function(){});
+    }
+    result.remove(function(){
+      res.send(true);
+    });
+    })
+  }else{
+res.status(403);
+res.end();
+}
+})
+
 
 function exists(route){
 try{
@@ -103,6 +132,3 @@ try{
  }
  return true;
 }
-
-
-})

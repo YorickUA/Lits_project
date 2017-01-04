@@ -48,8 +48,8 @@ input[type="file"] {
 padding:0px 10px 0px 10px;
 }
 .card_image{
-  height: 330px;
-  width: 435px;
+  max-height: 330px;
+  max-width: 435px;
 }
 #card_container{
   display: flex;
@@ -58,4 +58,15 @@ padding:0px 10px 0px 10px;
 
 .error{
   background-color: #e74c3c!important;
+}
+
+#delete_query, #message_area{
+  display: inline-block;
+}
+
+#message_area{
+  /*border:1px solid silver;
+  border-radius: 3px;*/
+  margin-top: 5px;
+  float:right;
 }

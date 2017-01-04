@@ -13,6 +13,8 @@ block js
 
 block content
  div(class="ui container fluid" style="width:80%; background-color:white; padding: 10px; box-shadow:0 0 10px rgba(0,0,0,0.5);")
+   h1(style="font-family: sans-serif;") &emsp; Edit player profile
+   hr
    div(id="card_container")
     div(style="display:inline-block")
      img(class="card_image" style="margin-right:10px; display:block" src="/images/#{avatar_picture}")
@@ -21,36 +23,45 @@ block content
         input(type="file" name="image")
         span(class="ui button" id="fileName" style="margin-right:5px") Choose file
        button(class="ui button primary" type="submit") Upload
-    form(method="POST" class="ui form" action="edit")
+    div(class="ui form")
       div(style="font-size:13pt; vertical-align: top;; display: inline-block; min-width: 300px; line-height: 38px;")
         div(class="three fields")
           div(class="field")
-            span(style="font-weight:bold") &nbsp;&nbsp; Name:&nbsp;
+            span(style="font-weight:bold") &nbsp;&nbsp; Name*:&nbsp;
             input(type="text" name="name")
           div(class="field")
-            span(style="font-weight:bold") &nbsp;&nbsp; Surname:&nbsp;
+            span(style="font-weight:bold") &nbsp;&nbsp; Surname*:&nbsp;
             input(type="text" name="surname")
           div(class="field")
-            span(style="font-weight:bold") &nbsp;&nbsp; Date of birth:&nbsp;
+            span(style="font-weight:bold") &nbsp;&nbsp; Date of birth*:&nbsp;
             input(type="text" name="date_of_birth")
         div
-          span(style="font-weight:bold") &nbsp;&nbsp; Country:&nbsp;
+          span(style="font-weight:bold") &nbsp;&nbsp; Country*:&nbsp;
           input(type="text" name="country")
         div(class="two fields")
           div(class="field")
-            span(style="font-weight:bold") &nbsp;&nbsp;  Years in game:&nbsp;
+            span(style="font-weight:bold") &nbsp;&nbsp;  Years in game*:&nbsp;
             input(type="number" name="years_pro" min="0")
           div(class="field")
-            span(style="font-weight:bold") &nbsp;&nbsp; Century breaks:&nbsp;
+            span(style="font-weight:bold") &nbsp;&nbsp; Century breaks*:&nbsp;
             input(type="number" name="century_breaks" min="0")
         div(class="two fields")
           div(class="field")
-            span(style="font-weight:bold") &nbsp;&nbsp; Ranking event titles:&nbsp;
+            span(style="font-weight:bold") &nbsp;&nbsp; Ranking event titles*:&nbsp;
             input(type="number" name="ranking_titles" min="0")
           div(class="field")
-            span(style="font-weight:bold")&nbsp;&nbsp;World championship titles:&nbsp;
+            span(style="font-weight:bold")&nbsp;&nbsp;World championship titles*:&nbsp;
             input(type="number" name="world_champs" min="0")
       div
         span(style="font-weight:bold; font-size:13pt") &nbsp;&nbsp; Biography:&nbsp;
         textarea(rows="18" name="bio")
-      button(type="submit" style="margin-top:5px; margin-left:10px; " class="ui button primary") Save
+      button(id="Update" style="margin-top:5px; margin-left:10px; " class="ui button primary") Save
+      button(id="Delete" style="margin-top:5px; margin-left:10px; " class="ui button red") Delete
+      div(id="message_area" class="")
+        div(id="delete_query" style="display:none")
+          span(style="margin-right:10px") Delete player?
+          button(id="delete_yes" class="ui button green") Yes
+          button(id="delete_no" class="ui button red") No
+        div(id="Edit_response" style="display:none;  font-size: 18px; font-weight: bold;")
+          span(id="success"  style="display:none;") Successfully updated
+          span(id="update_error"  style="display:none") Update failed
