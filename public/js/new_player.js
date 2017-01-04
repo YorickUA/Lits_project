@@ -8,46 +8,25 @@ $(document).ready(function(){
     event.preventDefault();
     var is_ok=true;
 
-    if (!$('input[name="name"]').val()){
-      is_ok=false;
-      $('input[name="name"]').toggleClass("error");
-    }
 
-    if (!$('input[name="surname"]').val()){
-      is_ok=false;
-      $('input[name="surname"]').toggleClass("error");
-    }
+     var check=  function(input){
+        if (!input.val()){
+          is_ok=false;
+          if(!input.hasClass("error"))
+          input.toggleClass("error");
+        }else{
+          input.removeClass("error");
+        }
+      }
 
-    if (!$('input[name="date_of_birth"]').val()){
-      is_ok=false;
-      $('input[name="date_of_birth"]').toggleClass("error");
-    }
-
-    if (!$('input[name="country"]').val()){
-      is_ok=false;
-      $('input[name="country"]').toggleClass("error");
-    }
-
-    if (!$('input[name="years_pro"]').val()){
-      is_ok=false;
-      $('input[name="years_pro"]').toggleClass("error");
-    }
-
-    if (!$('input[name="century_breaks"]').val()){
-      is_ok=false;
-      $('input[name="century_breaks"]').toggleClass("error");
-    }
-
-    if (!$('input[name="ranking_titles"]').val()){
-      is_ok=false;
-      $('input[name="ranking_titles"]').toggleClass("error");
-    }
-
-    if (!$('input[name="world_champs"]').val()){
-      is_ok=false;
-      $('input[name="world_champs"]').toggleClass("error");
-    }
-
+    check($('input[name="name"]'));
+    check($('input[name="surname"]'));
+    check($('input[name="date_of_birth"]'));
+    check($('input[name="country"]'));
+    check($('input[name="years_pro"]'));
+    check($('input[name="century_breaks"]'));
+    check($('input[name="ranking_titles"]'));
+    check($('input[name="world_champs"]'));
 
     if(is_ok){
       $('#new_player').trigger("submit");
@@ -56,5 +35,6 @@ $(document).ready(function(){
       $("#save_message").css("display","inline-block");
     }
   })
+
 
 })

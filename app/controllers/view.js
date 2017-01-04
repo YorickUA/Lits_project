@@ -12,6 +12,7 @@ module.exports = function(app) {
   app.use('/card', router);
 };
 
+
 router.post('/logout', function(req, res){
   var sid = req.session.id;
   var id=req.body.id;
@@ -21,7 +22,7 @@ router.post('/logout', function(req, res){
   })
 });
 
-router.get('/data/:id', function(req, res, next) {
+router.get('/data/:id', function(req, res) {
   var id = req.params.id;
   Player.find({_id:id}, function(err, players) {
     res.send(players);
@@ -31,19 +32,23 @@ router.get('/data/:id', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
   var id=req.params.id;
   Player.find({_id:id}, function(err, player) {
+  if (!player) {
+     res.redirect('/');
+     res.end();
+   }else{
     player=player[0];
-    console.log(player.date_of_birth.toISOString());
     if (req.session.user){
       res.render("edit_card", player);
     }
     else{
       res.render("view_card", player);
     }
+  }
   });
 })
 
 
-router.post('/login', function(req, res) {
+router.post('/login', function(req, res, next) {
       var password = req.body.password;
       var id=req.body.id;
       Admin.authorize(password, function(err, user) {
@@ -54,6 +59,7 @@ router.post('/login', function(req, res) {
           res.redirect(id);
         }
       });
+  })
 
 router.post('/:id', multipartMiddleware ,function(req, res, next) {
 
@@ -95,6 +101,21 @@ router.post('/:id', multipartMiddleware ,function(req, res, next) {
 
 })
 
+router.delete('/:id',function(req, res){
+  var id=req.params.id;
+  var player=Player.findOne({_id:id}, function(err, result){
+  console.log(result);
+
+  if(result.avatar_picture!="default.jpg"){
+    fs.unlink(config.root + "\\public\\images\\"+result.avatar_picture, function(){});
+  }
+  result.remove(function(){
+    res.send(true);
+  });
+  })
+})
+
+
 function exists(route){
 try{
    fs.statSync(route);
@@ -103,6 +124,3 @@ try{
  }
  return true;
 }
-
-
-})

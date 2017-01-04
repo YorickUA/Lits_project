@@ -8,6 +8,67 @@ $(document).ready(function(){
   $('input[name="date_of_birth"]').datepicker();
   $('input[name="date_of_birth"]').datepicker("option", "dateFormat", "yy-mm-dd" );
 
+  $('#Delete').on('click', function(){
+  //  $('#message_area').show();
+    $('#Edit_response').hide()
+    $('#delete_query').show();
+  })
+
+  $('#delete_no').on('click',function(){
+  //  $('#message_area').hide();
+    $('#delete_query').hide();
+  })
+
+  $('#delete_yes').on('click',function(){
+    var path=document.URL.substring(0, document.URL.lastIndexOf('/')) +document.URL.substring( document.URL.lastIndexOf('/'));
+    $.ajax({
+      url: path,
+      type: 'DELETE',
+      success:function(res){
+        if (res){
+          window.location.replace(window.location.origin);
+        }
+      }
+    });
+  })
+
+ $('#Update').on('click', function(){
+   var is_ok=true;
+   var check=  function(input){
+       if (!input.val()){
+         is_ok=false;
+         if(!input.hasClass("error"))
+          input.toggleClass("error");
+       }else{
+         input.removeClass("error");
+       }
+     }
+
+   check($('input[name="name"]'));
+   check($('input[name="surname"]'));
+   check($('input[name="date_of_birth"]'));
+   check($('input[name="country"]'));
+   check($('input[name="years_pro"]'));
+   check($('input[name="century_breaks"]'));
+   check($('input[name="ranking_titles"]'));
+   check($('input[name="world_champs"]'));
+
+   $('#delete_query').hide();
+   $('#Edit_response').show();
+   if(is_ok){
+    $("#update_error").hide();
+     $("#success").show();
+     $(".error").removeClass('error');
+   }else{
+     $("#success").hide();
+    $("#update_error").show().html("Fill all required fields");
+   }
+
+ }
+)
+
+
+
   $.get(document.URL.substring(0, document.URL.lastIndexOf('/')) + "/data"+document.URL.substring( document.URL.lastIndexOf('/')),
    function(response) {
     player = response;
