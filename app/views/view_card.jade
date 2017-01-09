@@ -15,7 +15,7 @@ block js
 block content
 
  div(class="ui container fluid" style="width:80%;background-color:white; position:relative; padding: 10px; box-shadow:0 0 10px rgba(0,0,0,0.5);")
-   h1(style="font-family: sans-serif;") &emsp; Player profile
+   h1(style="font-family: sans-serif;")  Player profile
    hr
    div(class="ui two column doubling stackable grid container")
     div(class="six wide column")
@@ -23,33 +23,33 @@ block content
        img(class="ui fluid image " style="margin-right:10px" src="/images/#{avatar_picture}")
       div(style="font-size:13pt; display: inline; min-width: 300px; line-height: 38px;")
         div
-          span(style="font-weight:bold") Personal info:
-        div
-          span(style="font-weight:bold") &emsp;Name:&nbsp;
+          span(class="bold") Personal info:
+        div(class="indented")
+          span(class="bold ") Name:&nbsp;
           span #{name}
-        div
-          span(style="font-weight:bold") &emsp;Surname:&nbsp;
+        div(class="indented")
+          span(class="bold ") Surname:&nbsp;
           span #{surname}
-        div
-          span(style="font-weight:bold") &emsp;Date of birth:&nbsp;
+        div(class="indented")
+          span(class="bold ") Date of birth:&nbsp;
           span #{date_of_birth.toISOString().substring(0, date_of_birth.toISOString().indexOf("T") )}
-        div
-          span(style="font-weight:bold") &emsp; Country:&nbsp;
+        div(class="indented")
+          span(class="bold ")  Country:&nbsp;
           span #{country}
         div
-          span(style="font-weight:bold") Career achievements:&nbsp;
-        div
-          span(style="font-weight:bold") &emsp; Years in game:&nbsp;
+          span(class="bold") Career achievements:&nbsp;
+        div(class="indented")
+          span(class="bold ")  Years in game:&nbsp;
           span #{Years_pro}
-        div
-          span(style="font-weight:bold") &emsp;Century breaks:&nbsp;
+        div(class="indented")
+          span(class="bold ") Century breaks:&nbsp;
           span #{century_breaks}
-        div
-          span(style="font-weight:bold") &emsp;Ranking event titles:&nbsp;
+        div(class="indented")
+          span(class="bold ") Ranking event titles:&nbsp;
           span #{ranking_titles}
-        div
-          span(style="font-weight:bold") &emsp;World championship titles:&nbsp;
+        div(class="indented")
+          span(class="bold ") World championship titles:&nbsp;
           span #{world_champs}
     div(class="ten wide column")
-      span(style="font-weight:bold; font-size:13pt") &emsp;Biography:&nbsp;
+      span(style="font-weight:bold; font-size:13pt") Biography:&nbsp;
       span(style=" font-size:13pt")  #{bio}

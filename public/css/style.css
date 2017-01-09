@@ -71,3 +71,13 @@ padding:0px 10px 0px 10px;
   margin-top: 5px;
   float:right;
 }
+
+.bold{
+  font-weight:bold;
+}
+.indented{
+  text-indent: 10px;
+}
+.pad_indent{
+  padding-left: 18px;
+}
