@@ -50,6 +50,7 @@ padding:0px 10px 0px 10px;
 .card_image{
   max-height: 330px;
   max-width: 435px;
+  min-width: 316px;
 }
 #card_container{
   display: flex;

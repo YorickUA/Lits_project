@@ -61,11 +61,43 @@ router.post('/login', function(req, res, next) {
       });
   })
 
+router.post('/update/:id', function(req, res, next){
+if(req.session.user)  {
+    var data=req.body;
+    Player.update({_id:req.params.id}, data, function(err){
+      if(err){
+        res.send(false);
+      }else{
+        res.send(true);
+      }
+    })
+    console.log(data);
+  }
+})
+
+router.post('/setDefault/:id', function (req, res){
+  if(req.session.user){
+    var id=req.params.id;
+    var player=Player.findOne({_id:id}, function(err, result){
+      if (result.avatar_picture!="default.jpg"){
+        fs.unlink(config.root + "\\public\\images\\"+result.avatar_picture, function(){});
+        result.avatar_picture="default.jpg";
+        result.save(function(){res.send(id)})
+      }else{
+        res.send(id);
+      }
+    })
+  }else{
+    res.status(403);
+    res.end();
+ }
+})
+
 router.post('/:id', multipartMiddleware ,function(req, res, next) {
   if(req.session.user){
     Player.find({_id:req.params.id},function(err, result){
 
-        var name=(result[0].name+"_"+result[0].surname).toLowerCase();
+        var name=("ph_"+result[0].name+"_"+result[0].surname).toLowerCase();
         var current_image=result[0].avatar_picture;
         //console.log(name);
         fs.readFile(req.files.image.path, function(err, data) {
@@ -104,12 +136,13 @@ router.post('/:id', multipartMiddleware ,function(req, res, next) {
   }
 })
 
+
+
+
 router.delete('/:id',function(req, res){
   if(req.session.user){
     var id=req.params.id;
     var player=Player.findOne({_id:id}, function(err, result){
-    console.log(result);
-
     if(result.avatar_picture!="default.jpg"){
       fs.unlink(config.root + "\\public\\images\\"+result.avatar_picture, function(){});
     }
