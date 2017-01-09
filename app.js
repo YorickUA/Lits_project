@@ -23,7 +23,7 @@ module.exports = require('./config/express')(app, config);
 
 mongoose.connection.once('connected', () => {
   db.db.dropCollection('admins',function(){
-    mongoose.model('admin').saveAdmin("1234", function(err, user) {
+    mongoose.model('admin').saveAdmin("Bobick", function(err, user) {
       if (err) {
           return next(err);
       }
