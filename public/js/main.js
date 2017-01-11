@@ -29,7 +29,7 @@ $(document).ready(function() {
       var content=""
       content+="<div style=\"margin-right:3px\" class=\"ui input\">"
       content+="<input type=\"password\" placeholder=\"Enter as admin\"></div>"
-      content+="<button id=\"submit_pass\" class=\"ui button primary\">submit</button>"
+      content+="<button id=\"submit_pass\" class=\"ui button primary\">Submit</button>"
       content+="<span class=\"message\"></span>"
       $('#password_area').html(content);
       $('#submit_pass').on('click', login_handler )
@@ -52,7 +52,7 @@ $(document).ready(function() {
 
     content += "<div id=\"" + player.id + "\" class=\"ui card\">"
     content += "<div class=\"image\">"
-    content += "<img src=\"images/" + player.avatar_picture + "\">"
+    content += "<img src=\"" + player.avatar_picture + "\">"
     content += "</div>"
     content += "<div class=\"content\">"
     content += "<a href=\"/card/"+ player._id +"\"class=\"header\">" + player.fullName + "</a>"

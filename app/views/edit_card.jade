@@ -16,12 +16,11 @@ block content
    h1(style="font-family: sans-serif;") &emsp; Edit player profile
    hr
    div(id="card_container")
-    div(style="display:inline-block")
-     img(class="card_image" style="margin-right:10px; display:block" src="/images/#{avatar_picture}")
-     form(method="POST" style="margin-top: 5px;" action="/card/#{id}"  enctype='multipart/form-data')
+    div(style="display:inline-block" class="ui form")
+     img(class="card_image" style="margin-right:10px; display:block" src="#{avatar_picture}")
+     form(method="POST" style="margin-top: 5px;" action="/card/#{id}")
        label
-        input(type="file" name="image")
-        span(class="ui button" id="fileName" style="margin-right:5px") Choose file
+        input(type="text" name="image" placeholder="Link to image")
        button(class="ui button primary" type="submit") Upload
        div(class="ui button" id="set_default") Set default
     div(class="ui form")
