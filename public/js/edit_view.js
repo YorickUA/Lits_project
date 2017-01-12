@@ -35,7 +35,7 @@ $(document).ready(function() {
   $('#Update').on('click', function() {
     var is_ok = true;
     var check = function(input) {
-      if (!input.val()) {
+      if (!input.val().replace(/^[ ]+|[ ]+$/g,'')) {
         is_ok = false;
         if (!input.hasClass("error"))
           input.toggleClass("error");
@@ -58,15 +58,15 @@ $(document).ready(function() {
     if (is_ok) {
       $("#update_error").hide();
       var data = {
-        name: $('input[name="name"]').val(),
-        surname: $('input[name="surname"]').val(),
-        date_of_birth: $('input[name="date_of_birth"]').val(),
-        country: $('input[name="country"]').val(),
-        Years_pro: $('input[name="years_pro"]').val(),
-        century_breaks: $('input[name="century_breaks"]').val(),
-        ranking_titles: $('input[name="ranking_titles"]').val(),
-        world_champs: $('input[name="world_champs"]').val(),
-        bio: $('textarea[name="bio"]').val()
+        name: $('input[name="name"]').val().replace(/^[ ]+|[ ]+$/g,''),
+        surname: $('input[name="surname"]').val().replace(/^[ ]+|[ ]+$/g,''),
+        date_of_birth: $('input[name="date_of_birth"]').val().replace(/^[ ]+|[ ]+$/g,''),
+        country: $('input[name="country"]').val().replace(/^[ ]+|[ ]+$/g,''),
+        Years_pro: $('input[name="years_pro"]').val().replace(/^[ ]+|[ ]+$/g,''),
+        century_breaks: $('input[name="century_breaks"]').val().replace(/^[ ]+|[ ]+$/g,''),
+        ranking_titles: $('input[name="ranking_titles"]').val().replace(/^[ ]+|[ ]+$/g,''),
+        world_champs: $('input[name="world_champs"]').val().replace(/^[ ]+|[ ]+$/g,''),
+        bio: $('textarea[name="bio"]').val().replace(/^[ ]+|[ ]+$/g,'')
       };
       var path = document.URL.substring(0, document.URL.lastIndexOf('/')) + "/update" + document.URL.substring(document.URL.lastIndexOf('/'));
       $.post(path, data, function(response) {

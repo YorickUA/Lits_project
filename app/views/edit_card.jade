@@ -13,12 +13,12 @@ block js
 
 block content
  div(class="ui container fluid" style="width:80%; background-color:white; padding: 10px; box-shadow:0 0 10px rgba(0,0,0,0.5);")
-   h1(style="font-family: sans-serif;") &emsp; Edit player profile
+   h1(style="font-family: sans-serif; text-indent:20px;") Edit player profile
    hr
    div(id="card_container")
     div(style="display:inline-block" class="ui form")
      img(class="card_image" style="margin-right:10px; display:block" src="#{avatar_picture}")
-     form(method="POST" style="margin-top: 5px;" action="/card/#{id}")
+     form(method="POST" style="margin-top: 5px; width:80%;" action="/card/#{id}")
        label
         input(type="text" name="image" placeholder="Link to image")
        button(class="ui button primary" type="submit") Upload

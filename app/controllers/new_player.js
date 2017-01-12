@@ -31,7 +31,7 @@ router.post('/new', function (req, res){
       century_breaks:req.body.century_breaks,
       ranking_titles:req.body.ranking_titles,
       world_champs:req.body.world_champs,
-      avatar_picture:"default.jpg",
+      avatar_picture:"/images/default.jpg",
       bio: req.body.bio
     })
     new_player.save(function(err, player){
