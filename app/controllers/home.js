@@ -7,8 +7,6 @@ var express = require('express'),
 module.exports = function (app) {
   console.log("exporting home.js");
   app.use('/', router);
-  //app.use('/admin', router);
-  //app.use('/login', router);
 };
 
 router.get('/', function (req, res, next) {
@@ -23,14 +21,6 @@ router.get('/card',function(req,res,next){
   res.redirect('/');
 })
 
-router.get('/admin', function(req, res,next){
-  console.log("/admin");
-  if(req.session.user){
-    res.render('admin');
-  }else{
-    res.redirect('/');
-  }
-})
 
 router.post('/', function(req, res) {
   switch (req.body.action) {

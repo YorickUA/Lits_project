@@ -52,7 +52,7 @@ $(document).ready(function() {
 
     content += "<div id=\"" + player.id + "\" class=\"ui card\">"
     content += "<div class=\"image\">"
-    content += "<img src=\"" + player.avatar_picture + "\">"
+    content += "<img style=\"object-fit:contain;\" src=\"" + player.avatar_picture + "\">"
     content += "</div>"
     content += "<div class=\"content\">"
     content += "<a href=\"/card/"+ player._id +"\"class=\"header\">" + player.fullName + "</a>"

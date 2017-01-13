@@ -17,7 +17,7 @@ block content
    hr
    div(id="card_container")
     div(style="display:inline-block" class="ui form")
-     img(class="card_image" style="margin-right:10px; display:block" src="#{avatar_picture}")
+     img(class="card_image" style="margin-right:10px; display:block; object-fit:contain; max-height:300px" src="#{avatar_picture}")
      form(method="POST" style="margin-top: 5px; width:80%;" action="/card/#{id}")
        label
         input(type="text" name="image" placeholder="Link to image")

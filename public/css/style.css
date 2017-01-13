@@ -10,9 +10,9 @@ a {
 }
 
 
-input[type="file"] {
+/*input[type="file"] {
     display: none;
-}
+}*/
 
 #header{
   padding: 8px 10px 0px 10px;
@@ -20,6 +20,7 @@ input[type="file"] {
   align-items: center;
   justify-content: space-around;
   background-image: -webkit-linear-gradient(top, hsl(144, 59%, 75%), hsl(100, 49%, 75%));
+  background-image: linear-gradient(to bottom, hsl(144, 59%, 75%), hsl(100, 49%, 75%));
   flex-basis: 400px;
   width: 100%;
   min-width: 600px!important;
